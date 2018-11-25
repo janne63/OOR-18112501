@@ -1,0 +1,64 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="OpeOsaamisKantaModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Opettaja">
+    <Key>
+      <PropertyRef Name="OpettajaID" />
+    </Key>
+    <Property Name="OpettajaID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Etunimi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Sukunimi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Sähköposti" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Henkilönumero" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="Yksikkö" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="Toimenkuva" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Osaamiset" Relationship="Self.FK__Osaamiset__Opett__5441852A" FromRole="Opettaja" ToRole="Osaamiset" />
+  </EntityType>
+  <EntityType Name="Osaamiset">
+    <Key>
+      <PropertyRef Name="OsaamisID" />
+    </Key>
+    <Property Name="OsaamisID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Osaaminen" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="OpettamisenHalukkuus" Type="Boolean" Nullable="false" />
+    <Property Name="Kuvaus" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="OpettajaID" Type="Int32" />
+    <NavigationProperty Name="Opettaja" Relationship="Self.FK__Osaamiset__Opett__5441852A" FromRole="Osaamiset" ToRole="Opettaja" />
+  </EntityType>
+  <EntityType Name="database_firewall_rules">
+    <Key>
+      <PropertyRef Name="id" />
+      <PropertyRef Name="name" />
+      <PropertyRef Name="start_ip_address" />
+      <PropertyRef Name="end_ip_address" />
+      <PropertyRef Name="create_date" />
+      <PropertyRef Name="modify_date" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="start_ip_address" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="end_ip_address" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="create_date" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="modify_date" Type="DateTime" Nullable="false" Precision="3" />
+  </EntityType>
+  <Association Name="FK__Osaamiset__Opett__5441852A">
+    <End Role="Opettaja" Type="Self.Opettaja" Multiplicity="0..1" />
+    <End Role="Osaamiset" Type="Self.Osaamiset" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Opettaja">
+        <PropertyRef Name="OpettajaID" />
+      </Principal>
+      <Dependent Role="Osaamiset">
+        <PropertyRef Name="OpettajaID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="OpeOsaamisKantaEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Opettaja" EntityType="Self.Opettaja" />
+    <EntitySet Name="Osaamiset" EntityType="Self.Osaamiset" />
+    <EntitySet Name="database_firewall_rules" EntityType="Self.database_firewall_rules" />
+    <AssociationSet Name="FK__Osaamiset__Opett__5441852A" Association="Self.FK__Osaamiset__Opett__5441852A">
+      <End Role="Opettaja" EntitySet="Opettaja" />
+      <End Role="Osaamiset" EntitySet="Osaamiset" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

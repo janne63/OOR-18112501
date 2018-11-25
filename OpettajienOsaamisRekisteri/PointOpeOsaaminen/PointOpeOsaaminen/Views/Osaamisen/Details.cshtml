@@ -1,0 +1,58 @@
+﻿@model PointOpeOsaaminen.Models.Osaamiset
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Osaamisen Opettajat</h2>
+
+<div>
+    <h4 class="modal-dialog">Osaaminen: @Html.DisplayFor(model => model.Osaaminen)</h4>
+    <h4 class="modal-dialog"> Kuvaus: @Html.DisplayFor(model => model.Kuvaus)</h4>
+</div>
+<div style="height: 200px; overflow: auto;">
+    <table class="table">
+
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Opettaja.Etunimi)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Opettaja.Sukunimi)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Opettaja.Henkilönumero)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Opettaja.Yksikkö)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Opettaja.Toimenkuva)
+            </th>
+        </tr>
+        <tr>
+            <td>
+                @Html.DisplayFor(model => model.Opettaja.Etunimi)
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.Opettaja.Sukunimi)
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.Opettaja.Henkilönumero)
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.Opettaja.Yksikkö)
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.Opettaja.Toimenkuva)
+            </td>
+            <td>
+                @Html.ActionLink("Yhteystiedot", "")
+            </td>
+        </tr>
+
+    </table>
+</div>
+<p>
+    @Html.ActionLink("Takaisin", "Index")
+</p>
